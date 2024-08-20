@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	let currentFilter = '';
 	let currentAudio = null; 
 	midColumn.style.display = "none";
-	soundButton.style.opacity = 0; 
+	// soundButton.style.opacity = 0; 
 	soundButton.style.display = "none"; 
 	prevButton.style.display = "none"; 
 	nextButton.style.display = "none"; 
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					const audio = new Audio(soundFile);
 					audio.oncanplaythrough = function() {
 							// If the file is available, show the sound button
-							soundButton.style.opacity = 1; 
+							// soundButton.style.opacity = 1; 
 							soundButton.style.display = "block"; 
 							soundButton.onclick = function () {
 									if (currentAudio && currentAudio.src === audio.src) {
