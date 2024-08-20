@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	let currentFilter = '';
 	let currentAudio = null; 
 	midColumn.style.display = "none";
-	soundButton.style.opacity =0; 
+	soundButton.style.opacity = 0; 
+	soundButton.style.display = "none"; 
 	prevButton.style.display = "none"; 
 	nextButton.style.display = "none"; 
 	soundButton.textContent = "Play"; 
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							prevButton.style.display = "none";
 							nextButton.style.display = "none";
 							soundButton.style.opacity =0; 
+							soundButton.style.display = "none"; 
 							return; 
 					}
 
@@ -149,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					audio.oncanplaythrough = function() {
 							// If the file is available, show the sound button
 							soundButton.style.opacity = 1; 
+							soundButton.style.display = "block"; 
 							soundButton.onclick = function () {
 									if (currentAudio && currentAudio.src === audio.src) {
 											
@@ -182,13 +185,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					audio.onerror = function() {
 							if (!audioFileFound) {
 									soundButton.style.opacity = 0; 
+									soundButton.style.display = "none"; 
 							}
 					};
 			});
 
 			// If no audio file is found, hide the sound button
 			if (!audioFileFound) {
-					soundButton.style.opacity = 0; 
+					soundButton.style.display = "none"; 
 			}
 	}
 });
