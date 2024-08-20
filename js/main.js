@@ -1,124 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function () {
-// 	const buttons = document.querySelectorAll(".category-btn, .tag-btn");
-// 	const infoText = document.querySelector(".info__text");
-// 	const midColumn = document.querySelector(".mid-column");
-// 	const soundButton = document.querySelector(".sound");
-// 	const prevButton = document.querySelector(".info__prev");
-// 	const nextButton = document.querySelector(".info__next");
-// 	let currentIndex = 0;
-// 	let items = [];
-// 	let currentFilter = '';
-
-// 	midColumn.style.display = "none";
-
-// 	buttons.forEach(function (button) {
-// 		button.addEventListener("click", function () {
-// 			infoText.innerHTML = "";
-
-// 			if (items.length > 0) {
-// 				midColumn.style.display = "flex";
-// 				midColumn.scrollIntoView({ behavior: 'smooth' });
-// 			}
-// 			if (button.classList.contains('category-btn')) {
-// 				currentFilter = 'category';
-// 			} else {
-// 				currentFilter = 'tag';
-// 			}
-// 			const clickedButtonId = button.id;
-// 			const dataKey = button.classList.contains('category-btn') ? 'category' : 'tag';
-// 			items = Array.from(document.querySelectorAll(`[data-${dataKey}="${clickedButtonId}"]`));
-
-// 			infoText.innerHTML = "";
-// 			let buttonsDisplay = items.length > 1 ? 'block' : 'none';
-// 			prevButton.style.display = buttonsDisplay;
-// 			nextButton.style.display = buttonsDisplay;
-// 			if (items.length > 0) {
-// 				currentFilter === 'category' ? currentIndex = Math.floor(Math.random() * items.length) : currentIndex = 0
-// 				appendItem();
-// 				midColumn.style.display = "flex";
-// 			}
-// 		});
-// 	});
-
-// 	prevButton.addEventListener("click", function () {
-// 		if (items.length > 0 && currentIndex > 0) {
-// 			currentIndex--;
-// 		} else if (currentFilter === 'tag' && currentIndex == 0) {
-// 			return false;
-// 		} else if (items.length > 0) {
-// 			currentIndex = items.length - 1;
-// 		}
-// 		infoText.innerHTML = "";
-// 		appendItem();
-// 	});
-// 	nextButton.addEventListener("click", function () {
-// 		if (items.length > 0 && currentIndex < items.length - 1) {
-// 			currentIndex++;
-// 		} else if (currentFilter === 'tag' && currentIndex === items.length - 1) {
-// 			return false;
-// 		} else if (items.length > 0) {
-// 			currentIndex = 0;
-// 		}
-// 		infoText.innerHTML = "";
-// 		appendItem();
-// 	});
-
-// 	const imagesCache = {};
-
-// 	function appendItem() {
-// 		const selectedItem = items[currentIndex].cloneNode(true);
-// 		const id = selectedItem.getAttribute('id');
-// 		errors = 0;
-// 		const ps = selectedItem.querySelectorAll('p');
-// 		for (const p of ps) {
-// 			p.style.display = 'none';
-// 		}
-
-// 		if (!imagesCache[id]) {
-// 			const img = new Image();
-// 			img.src = `images/${id}.png`;
-// 			img.classList.add('img-content');
-// 			img.style.display = 'none';
-
-// 			img.onload = () => {
-// 				img.style.display = 'block';
-// 				imagesCache[id] = img;
-// 				const ps = selectedItem.querySelectorAll('p');
-// 				for (const p of ps) {
-// 					p.style.display = 'none';
-// 				}
-// 			};
-
-// 			img.onerror = () => {
-// 				const imgJPG = new Image();
-// 				imgJPG.src = `images/${id}.jpg`;
-// 				imgJPG.classList.add('img-content');
-// 				imgJPG.style.display = 'none';
-
-// 				imgJPG.onload = () => {
-// 					imgJPG.style.display = 'block';
-// 					imagesCache[id] = imgJPG;
-// 					const ps = selectedItem.querySelectorAll('p');
-// 					for (const p of ps) {
-// 						p.style.display = 'none';
-// 					}
-// 				};
-
-// 				imgJPG.onerror = () => {
-// 					for (const p of ps) {
-// 						p.style.display = 'block';
-// 					}
-// 				}
-// 				selectedItem.appendChild(imgJPG);
-// 			}
-// 			selectedItem.appendChild(img);
-// 		} else {
-// 			selectedItem.appendChild(imagesCache[id]);
-// 		}
-
-// 		infoText.appendChild(selectedItem);
-// 	}
-// });
 document.addEventListener("DOMContentLoaded", function () {
 	const buttons = document.querySelectorAll(".category-btn, .tag-btn");
 	const infoText = document.querySelector(".info__text");
@@ -131,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	let currentFilter = '';
 	let currentAudio = null; 
 	midColumn.style.display = "none";
-	soundButton.style.display = "none"; 
+	soundButton.style.opacity =0; 
 	prevButton.style.display = "none"; 
 	nextButton.style.display = "none"; 
 	soundButton.textContent = "Play"; 
@@ -162,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							
 							prevButton.style.display = "none";
 							nextButton.style.display = "none";
-							soundButton.style.display = "none"; 
+							soundButton.style.opacity =0; 
 							return; 
 					}
 
@@ -269,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					const audio = new Audio(soundFile);
 					audio.oncanplaythrough = function() {
 							// If the file is available, show the sound button
-							soundButton.style.display = "block"; 
+							soundButton.style.opacity = 1; 
 							soundButton.onclick = function () {
 									if (currentAudio && currentAudio.src === audio.src) {
 											
@@ -302,14 +181,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					};
 					audio.onerror = function() {
 							if (!audioFileFound) {
-									soundButton.style.display = "none"; 
+									soundButton.style.opacity = 0; 
 							}
 					};
 			});
 
 			// If no audio file is found, hide the sound button
 			if (!audioFileFound) {
-					soundButton.style.display = "none";
+					soundButton.style.opacity = 0; 
 			}
 	}
 });
