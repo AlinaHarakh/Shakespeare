@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							
 							prevButton.style.display = "none";
 							nextButton.style.display = "none";
-							soundButton.style.opacity =0; 
+							// soundButton.style.opacity =0; 
 							soundButton.style.display = "none"; 
 							return; 
 					}
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					};
 					audio.onerror = function() {
 							if (!audioFileFound) {
-									soundButton.style.opacity = 0; 
+									// soundButton.style.opacity = 0; 
 									soundButton.style.display = "none"; 
 							}
 					};
