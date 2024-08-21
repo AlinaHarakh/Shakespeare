@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	let currentFilter = '';
 	let currentAudio = null; 
 	midColumn.style.display = "none";
-	// soundButton.style.opacity = 0; 
 	soundButton.style.display = "none"; 
 	prevButton.style.display = "none"; 
 	nextButton.style.display = "none"; 
